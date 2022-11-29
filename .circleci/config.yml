@@ -34,6 +34,22 @@ jobs:
       - run:
           name: Run tests
           command: yarn run test:unit
+  build:
+    docker:
+      - image: cimg/node:16.16
+
+    working_directory: /tmp
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: "yarn"
+      - run:
+          name: Creating Artifacts
+          command: yarn run build
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - build
 
 workflows:
   # Below is the definition of your workflow.
