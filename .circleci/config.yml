@@ -29,7 +29,7 @@ jobs:
       - checkout
       - run:
           name: Create Artifacts Directory
-          command: mkdir -p /artifacts
+          command: mkdir -p ~/artifacts 
       - node/install-packages:
           pkg-manager: "yarn"
       - run:
@@ -37,9 +37,9 @@ jobs:
           command: yarn run build
       - run:
           name: Copy Build Files to Artifacts
-          command: cp -r dist /artifacts
+          command: cp -r dist ~/artifacts
       - store_artifacts:
-          path: /artifacts
+          path: ~/artifacts
           destination: build-output
 
 workflows:
