@@ -37,19 +37,17 @@ jobs:
   build:
     docker:
       - image: cimg/node:16.16
-
-    working_directory: /tmp
     steps:
-      - checkout
+      - run:
+        command:
+          mkdir /artifacts
       - node/install-packages:
           pkg-manager: "yarn"
       - run:
-          name: Creating Artifacts
           command: yarn run build
-      - persist_to_workspace:
-          root: /tmp
-          paths:
-            - build
+      - store_artifacts:
+        path: /artifact
+        destination: artifact
 
 workflows:
   # Below is the definition of your workflow.
